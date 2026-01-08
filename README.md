@@ -14,16 +14,15 @@ This project demonstrates the **"Full Stack Architect"** capability: from the **
 
 This architecture hosts a production-grade **Retrieval-Augmented Generation (RAG)** application designed to solve the "Enterprise Knowledge Gap." It enables employees to query internal proprietary documents securely without data leakage.
 
-### 🧠 Core AI Architecture
+Core AI Architecture
 * **Generative Engine:** **Azure OpenAI Service (GPT-4o)** deployed as a private instance.
     * *Configuration:* Strict content filtering enabled; "Data logging" disabled to ensure inputs are not used for model training.
 * **Vector Database:** **Azure AI Search** configured with **Hybrid Retrieval** (Vector + Keyword Search) and Semantic Reranking to maximize relevance.
 * **Orchestration:** Python-based backend utilizing **LangChain** for context window management and prompt engineering.
 
-### 💻 User Experience (Streamlit)
 The frontend provides a chat interface supporting **real-time token streaming** and **source citations**, allowing users to verify AI answers against original documents.
 
-### 📸 Screenshot 1: Secure Application Interface
+Secure Application Interface
 *Demonstrating the RAG chatbot running successfully via Private IP (10.0.1.5).*
 
 
