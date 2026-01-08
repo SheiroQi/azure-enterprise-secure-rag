@@ -12,14 +12,26 @@ This project demonstrates the **"Full Stack Architect"** capability: from the **
 
 ## 💡 Part 1: The Business Workload (AI Innovation)
 
-The core application enables internal teams to query proprietary knowledge bases securely. It uses the "Retrieve-then-Generate" pattern to ensure answers are grounded in factual data with citations.
+This architecture hosts a production-grade **Retrieval-Augmented Generation (RAG)** application designed to solve the "Enterprise Knowledge Gap." It enables employees to query internal proprietary documents securely without data leakage.
 
-* **🤖 Engine:** Azure OpenAI (GPT-4o) + Azure AI Search (Vector).
-* **💻 Interface:** Python (Streamlit) frontend with real-time streaming.
+### 🧠 Core AI Architecture
+* **Generative Engine:** **Azure OpenAI Service (GPT-4o)** deployed as a private instance.
+<img width="3189" height="644" alt="conclusion" src="https://github.com/user-attachments/assets/5a294f85-334d-49eb-97ae-7007260ccc60" />
+
+    * *Configuration:* Strict content filtering enabled; "Data logging" disabled to ensure inputs are not used for model training.
+* **Vector Database:** **Azure AI Search** configured with **Hybrid Retrieval** (Vector + Keyword Search) and Semantic Reranking to maximize relevance.
+<img width="2201" height="611" alt="connection_name" src="https://github.com/user-attachments/assets/5f7c3943-09bf-4fc8-8234-260a5734f48d" />
+
+* **Orchestration:** Python-based backend utilizing **LangChain** for context window management and prompt engineering.
+<img width="930" height="453" alt="Private_Endpoint" src="https://github.com/user-attachments/assets/ae2d9da2-0716-42fa-85fc-792b971ba4cb" />
+
+### 💻 User Experience (Streamlit)
+The frontend provides a chat interface supporting **real-time token streaming** and **source citations**, allowing users to verify AI answers against original documents.
 
 ### 📸 Screenshot 1: Secure Application Interface
-*Demonstrating the RAG chatbot running successfully via Private IP (10.0.1.5), proving the application logic is fully functional.*
-<img width="100%" alt="app_demo" src="[https://github.com/user-attachments/assets/1822a9ee-a577-4a57-b3cd-493043ebf63f](https://github.com/user-attachments/assets/1822a9ee-a577-4a57-b3cd-493043ebf63f)">
+*Demonstrating the RAG chatbot running successfully via Private IP (10.0.1.5). Note the citation functionality which grounds the AI response in factual data.*
+
+<img width="100%" alt="app_demo" src="https://github.com/user-attachments/assets/1822a9ee-a577-4a57-b3cd-493043ebf63f">
 
 ---
 
