@@ -1,0 +1,42 @@
+name: "DevSecOps Infrastructure Scan"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  iac-security-scan:
+    name: "Checkov Security Scan"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Checkov Scanner
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ./infra
+          framework: terraform
+          soft_fail: false 
+          skip_check: CKV_AZURE_1 
+
+  terraform-plan:
+    name: "Terraform Plan"
+    needs: iac-security-scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      
+      - name: Terraform Init
+        working-directory: ./infra
+        run: terraform init
+
+      - name: Terraform Validate
+        working-directory: ./infra
+        run: terraform validate
