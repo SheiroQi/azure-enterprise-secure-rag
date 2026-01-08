@@ -16,20 +16,16 @@ This architecture hosts a production-grade **Retrieval-Augmented Generation (RAG
 
 ### 🧠 Core AI Architecture
 * **Generative Engine:** **Azure OpenAI Service (GPT-4o)** deployed as a private instance.
-<img width="3189" height="644" alt="conclusion" src="https://github.com/user-attachments/assets/5a294f85-334d-49eb-97ae-7007260ccc60" />
-
     * *Configuration:* Strict content filtering enabled; "Data logging" disabled to ensure inputs are not used for model training.
 * **Vector Database:** **Azure AI Search** configured with **Hybrid Retrieval** (Vector + Keyword Search) and Semantic Reranking to maximize relevance.
-<img width="2201" height="611" alt="connection_name" src="https://github.com/user-attachments/assets/5f7c3943-09bf-4fc8-8234-260a5734f48d" />
-
 * **Orchestration:** Python-based backend utilizing **LangChain** for context window management and prompt engineering.
-<img width="930" height="453" alt="Private_Endpoint" src="https://github.com/user-attachments/assets/ae2d9da2-0716-42fa-85fc-792b971ba4cb" />
 
 ### 💻 User Experience (Streamlit)
 The frontend provides a chat interface supporting **real-time token streaming** and **source citations**, allowing users to verify AI answers against original documents.
 
 ### 📸 Screenshot 1: Secure Application Interface
-*Demonstrating the RAG chatbot running successfully via Private IP (10.0.1.5). Note the citation functionality which grounds the AI response in factual data.*
+*Demonstrating the RAG chatbot running successfully via Private IP (10.0.1.5).*
+
 
 <img width="100%" alt="app_demo" src="https://github.com/user-attachments/assets/1822a9ee-a577-4a57-b3cd-493043ebf63f">
 
@@ -46,3 +42,21 @@ graph LR
     C -->|Pass| D[Terraform Plan];
     C -->|Fail - High Sev| E[Block Pipeline];
     D --> F[Ready for Apply];
+
+
+Infrastructure as Code (Terraform)
+All resources (Private Endpoints, Cognitive Services) are defined in Terraform Modules, ensuring reproducibility and drift control.
+
+<img width="100%" alt="terraform_code" src="https://github.com/user-attachments/assets/8de22cee-3e14-4cce-aa04-849909192a9b">
+
+Part 3: Architecture & Security Features
+
+Zero Trust Networking (Perimeter Security)
+Public Access Disabled: Both Azure OpenAI and AI Search services have public_network_access_enabled = false.
+
+Private Link Enforcement: The Python application (Src) communicates with AI PaaS services exclusively through the Azure backbone via Private Endpoints (10.0.1.x).
+
+Private Networking Validation
+Validating in Azure Portal that the AI Service is accessible only via Private Endpoint. Public internet access is strictly blocked.
+
+<img width="100%" alt="azure_private_link" src="https://github.com/user-attachments/assets/3cae3e19-1f49-4e90-bc40-4c8b6eda6c45">
