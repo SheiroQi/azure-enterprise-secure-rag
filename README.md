@@ -1,24 +1,21 @@
-<img width="3189" height="644" alt="image" src="https://github.com/user-attachments/assets/854e1b7a-1625-4afa-bbce-72f27f72482b" /># Enterprise Secure RAG Solution on Azure
+# Enterprise Secure RAG Solution on Azure (DevSecOps Edition)
 
-An enterprise-grade Generative AI architecture demonstrating **Zero Trust Networking**, **Infrastructure as Code**, and **Private Data Handling**.
+![Build Status](https://github.com/SheiroQi/azure-enterprise-secure-rag/actions/workflows/terraform-security.yml/badge.svg)
 
-## 🏗 Architecture & Security Features
-* **Hub-Spoke Network Topology**: All resources isolated in Virtual Network.
-* **Private Link Enforcement**: Azure OpenAI & AI Search accessed exclusively via Private Endpoints (No Public Internet).
-* **Infrastructure as Code**: Provisioned 100% via **Terraform**.
+An enterprise-grade Generative AI infrastructure reference architecture. This project demonstrates **"Compliance-as-Code"** by integrating automated security scanning, **Zero Trust Networking**, and **Infrastructure as Code (IaC)** governance pipelines.
 
-## 🚀 Demo Screenshots
+**Target Compliance Standards:** HIPAA / ISO 27001 (Simulated for Healthcare & Finance sectors)
 
-### 1. Secure Application Interface
-*Demonstrating RAG retrieval via Private IP (10.0.1.5).*
-![App Demo]<img width="3189" height="644" alt="conclusion" src="https://github.com/user-attachments/assets/1822a9ee-a577-4a57-b3cd-493043ebf63f" />
+---
 
+## 🛡️ DevSecOps & Governance Workflow
 
-### 2. Azure Private Networking
-*Validated Private Endpoint connection in Azure Portal.*
-![Azure Portal]<img width="2201" height="611" alt="connection_name" src="https://github.com/user-attachments/assets/964814ef-752d-404d-b95a-9adb28b8ac78" />
+This project moves beyond simple deployment by implementing a **Shift-Left Security** strategy. Every infrastructure change undergoes rigorous scanning before provisioning.
 
-
-### 3. Infrastructure as Code (Terraform)
-*Automated provisioning of security resources.*
-![Terraform Code]<img width="930" height="453" alt="Private_Endpoint" src="https://github.com/user-attachments/assets/94ee3878-0bb9-47b8-86eb-509092293510" />
+```mermaid
+graph LR
+    A[Dev Commit] -->|Push| B(GitHub Actions);
+    B --> C{Checkov Security Scan};
+    C -->|Pass| D[Terraform Plan];
+    C -->|Fail (High Severity)| E[Block Pipeline];
+    D --> F[Ready for Apply];
