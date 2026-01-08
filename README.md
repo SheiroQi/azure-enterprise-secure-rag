@@ -17,5 +17,5 @@ graph LR
     A[Dev Commit] -->|Push| B(GitHub Actions);
     B --> C{Checkov Security Scan};
     C -->|Pass| D[Terraform Plan];
-    C -->|Fail (High Severity)| E[Block Pipeline];
+    C -->|Fail - High Sev| E[Block Pipeline];
     D --> F[Ready for Apply];
